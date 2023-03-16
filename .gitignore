@@ -1,0 +1,10 @@
+/*
+!/public
+!/nginx
+!/app
+!/composer.json
+!/composer.lock
+!/docker-compose.yml
+!/Dockerfile
+!/index.php
+!/.gitignore

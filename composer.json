@@ -1,0 +1,20 @@
+{
+    "name": "venchiarutti/products-management",
+    "description": "Project using React and PHP to manage products",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Venchiarutti\\ProductsManagement\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Henrique de Mello Pinho Venchiarutti"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "^2.14",
+        "ext-json": "*"
+    }
+}
