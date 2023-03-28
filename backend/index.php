@@ -9,18 +9,14 @@ use Venchiarutti\ProductsManagement\Controller\{
 };
 
 $routes = [
-    ['POST', '/api/product/new', ProductNew::class],
-    ['POST', '/api/product/delete', ProductDelete::class],
-    ['GET', '/api/product/list', ProductList::class],
-    ['GET', '/product/list', 'public/product-list.html'],
-    ['GET', '/product/new', 'public/product-new.html']
+    ['POST', '/product/new', ProductNew::class],
+    ['POST', '/product/delete', ProductDelete::class],
+    ['GET', '/product/list', ProductList::class]
 ];
 
 foreach ($routes as $route) {
     list($method, $uri, $class) = $route;
-    if ($_SERVER['REQUEST_METHOD'] === $method && preg_match("#^$uri$#", $_SERVER['REQUEST_URI'], $matches)) {
-        if (str_starts_with($_SERVER['REQUEST_URI'], "/api")) {
-            array_shift($matches);
+    if ($_SERVER['REQUEST_METHOD'] === $method && preg_match("#^$uri$#", $_SERVER['REQUEST_URI'])) {
             $controller = new $class();
 
             if ($method === 'POST') {
@@ -34,11 +30,6 @@ foreach ($routes as $route) {
             header('Content-Type: application/json');
             echo json_encode($result);
             exit();
-        }
-        header('Location: /' . $class);
-        exit();
     }
 }
-
-header('Location: /public/product-list.html');
 exit();

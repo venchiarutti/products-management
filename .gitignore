@@ -1,10 +1,4 @@
-/*
-!/public
-!/nginx
-!/app
-!/composer.json
-!/composer.lock
-!/docker-compose.yml
-!/Dockerfile
-!/index.php
-!/.gitignore
+/backend/vendor/
+/backend/.env
+/frontend/node_modules
+/.idea
