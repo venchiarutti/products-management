@@ -15,6 +15,9 @@
     ],
     "require": {
         "doctrine/orm": "^2.14",
-        "ext-json": "*"
+        "ext-json": "*",
+        "doctrine/cache": "^2.2",
+        "symfony/cache": "^5",
+        "doctrine/annotations": "^2.0"
     }
 }
