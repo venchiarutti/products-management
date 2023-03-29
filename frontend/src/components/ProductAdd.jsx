@@ -193,7 +193,7 @@ export default function ProductAdd() {
         }
         const apiErrorDiv = apiError.current;
 
-        await fetch('http://localhost:8000/product/new', {
+        await fetch('http://products-management.venchiarutti.dev/product/new', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
