@@ -23,25 +23,25 @@ class ProductDelete
         $this->entityManager = (new EntityManagerFactory())->create();
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     public function handle(array $data): bool
     {
-        $queryBuilder = $this->entityManager->createQueryBuilder();
+        try {
+            $queryBuilder = $this->entityManager->createQueryBuilder();
 
-        $query = $queryBuilder->select('e')
-            ->from(Product::class, 'e')
-            ->where($queryBuilder->expr()->in('e.id', $data['ids']))
-            ->getQuery();
+            $query = $queryBuilder->select('e')
+                ->from(Product::class, 'e')
+                ->where($queryBuilder->expr()->in('e.id', $data['ids']))
+                ->getQuery();
 
-        $entities = $query->getResult();
+            $entities = $query->getResult();
 
-        foreach ($entities as $entity) {
-            $this->entityManager->remove($entity);
+            foreach ($entities as $entity) {
+                $this->entityManager->remove($entity);
+            }
+            $this->entityManager->flush();
+            return true;
+        } catch (\Exception) {
+            return false;
         }
-        $this->entityManager->flush();
-        return true;
     }
 }

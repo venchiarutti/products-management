@@ -23,7 +23,8 @@ class ProductNew
 
     private const ATTRIBUTES = [
         "Book" => "weight",
-        "Furniture" => "dimensions"
+        "Furniture" => "dimensions",
+        "DVD" => "size"
     ];
 
     /**
@@ -35,30 +36,29 @@ class ProductNew
         $this->attributeHandler = new AttributeHandler();
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     * @throws \Exception
-     */
     public function handle(array $data): bool
     {
-        $product = new Product();
+        try {
+            $product = new Product();
 
-        $product->setName($data["name"])
-            ->setSku($data["sku"])
-            ->setType($data["type"])
-            ->setPrice($data["price"]);
+            $product->setName($data["name"])
+                ->setSku($data["sku"])
+                ->setType($data["type"])
+                ->setPrice($data["price"]);
 
-        $requiredAttribute = self::ATTRIBUTES[$data["type"]];
+            $requiredAttribute = self::ATTRIBUTES[$data["type"]];
 
-        if (!isset($data["attributes"][$requiredAttribute])) {
-            throw new \InvalidArgumentException("Required attribute is missing");
+            if (!isset($data["attributes"][$requiredAttribute])) {
+                throw new \InvalidArgumentException("Required attribute is missing");
+            }
+
+            foreach($data["attributes"] as $name => $value) {
+                $this->attributeHandler->setCustomAttribute($name, $value, $product);
+            }
+
+            return true;
+        } catch (\Exception) {
+            return false;
         }
-
-        foreach($data["attributes"] as $name => $value) {
-            $this->attributeHandler->setCustomAttribute($name, $value, $product);
-        }
-
-        return true;
     }
 }
