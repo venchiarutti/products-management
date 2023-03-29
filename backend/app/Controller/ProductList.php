@@ -21,7 +21,8 @@ class ProductList
 
     private const ATTRIBUTES = [
         "Book" => "weight",
-        "Furniture" => "dimensions"
+        "Furniture" => "dimensions",
+        "DVD" => "size"
     ];
 
     /**
@@ -40,14 +41,14 @@ class ProductList
         $productsInfo = [];
 
         foreach ($products as $product) {
-            $type = $product->getType();
-            $attribute = self::ATTRIBUTES[$type];
+            $attribute = self::ATTRIBUTES[$product->getType()];
             $productsInfo[] = [
                 "id" => $product->getId(),
                 "name" => $product->getName(),
                 "sku" => $product->getSku(),
-                "type" => $type,
-                $attribute => $this->attributeHandler->getCustomAttribute($attribute, $product)->getValue(),
+                "attributes" => [
+                    $attribute => $this->attributeHandler->getCustomAttribute($attribute, $product)->getValue()
+                ],
                 "price" => $product->getPrice()
             ];
         }
