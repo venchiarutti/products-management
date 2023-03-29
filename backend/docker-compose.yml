@@ -42,7 +42,6 @@ services:
       - app-network
 
 networks:
-  app-network:
     driver: bridge
 
 volumes:
