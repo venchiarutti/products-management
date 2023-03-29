@@ -5,9 +5,9 @@ services:
   app:
     build: .
     container_name: php-app
-    working_dir: /var/www/
+    working_dir: /var/www/products-management/
     volumes:
-      - ./:/var/www
+      - ./:/var/www/products-management
     networks:
       - app-network
 
@@ -34,9 +34,9 @@ services:
     image: nginx:alpine
     container_name: php-nginx
     ports:
-      - 8000:80
+      - 80:80
     volumes:
-      - ./:/var/www
+      - ./:/var/www/products-management
       - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
