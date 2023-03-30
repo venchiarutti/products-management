@@ -193,7 +193,7 @@ export default function ProductAdd() {
         }
         const apiErrorDiv = apiError.current;
 
-        await fetch('http://products-management.venchiarutti.dev/product/new', {
+        await fetch('https://products-management.venchiarutti.dev/product/new', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -264,7 +264,7 @@ export default function ProductAdd() {
                         {showWidthValidation && (<div className="validation-message alert alert-danger">Please provide a valid width</div>)}
                         <br/>
                         <label htmlFor="length">Length:</label>
-                        <input type="text" id="lenght" name="lenght" value={length} onChange={handleLengthChange}/>
+                        <input type="text" id="length" name="length" value={length} onChange={handleLengthChange}/>
                         {showLengthValidation && (<div className="validation-message alert alert-danger">Please provide a valid length</div>)}
                         <br/>
                     </div>

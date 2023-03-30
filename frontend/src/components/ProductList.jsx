@@ -7,7 +7,7 @@ export default function ProductList() {
     const [selectedProducts, setSelectedProducts] = useState([]);
 
     useEffect(() => {
-        fetch('http://products-management.venchiarutti.dev/product/list')
+        fetch('https://products-management.venchiarutti.dev/product/list')
             .then(response => response.json())
             .then(data => {
                 setProducts(data);
@@ -27,7 +27,7 @@ export default function ProductList() {
     };
 
     const handleDeleteButtonClick = () => {
-        fetch('http://products-management.venchiarutti.dev/product/delete', {
+        fetch('https://products-management.venchiarutti.dev/product/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
